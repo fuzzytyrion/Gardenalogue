@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plantalogue.Web", "Plantalogue.Web\Plantalogue.Web.csproj", "{0A7B6BD4-FA0E-4802-BCEF-A8CD6C4C91C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A7B6BD4-FA0E-4802-BCEF-A8CD6C4C91C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A7B6BD4-FA0E-4802-BCEF-A8CD6C4C91C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A7B6BD4-FA0E-4802-BCEF-A8CD6C4C91C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A7B6BD4-FA0E-4802-BCEF-A8CD6C4C91C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CDB355D6-FAA2-436E-9FAD-42498BF6CB84}
+	EndGlobalSection
+EndGlobal
