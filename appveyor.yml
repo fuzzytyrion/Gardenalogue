@@ -21,10 +21,10 @@ before_build:
   # Display .NET Core version
   - cmd: dotnet --version
   # Display minimal restore text
-  - cmd: dotnet restore ./Gardenalogue/Gardenalogue.Web.csproj --verbosity m
+  - cmd: dotnet restore ./Gardenalogue.Web/Gardenalogue.Web.csproj --verbosity m
 build_script:
   # output will be in ./src/bin/debug/netcoreapp1.1/publish
-  - cmd: dotnet publish ./Gardenalogue/Gardenalogue.Web.csproj
+  - cmd: dotnet publish ./Gardenalogue.Web/Gardenalogue.Web.csproj
 after_build:
   # For once the build has completed
 artifacts:
@@ -34,7 +34,7 @@ artifacts:
 clone_depth: 1
 test_script:
   # restore packages for our unit tests
-  - cmd: dotnet restore ./Gardenalogue/Gardenalogue.Test.csproj --verbosity m
+  - cmd: dotnet restore ./Gardenalogue.Test/Gardenalogue.Test.csproj --verbosity m
   # run the unit tests
   - cmd: dotnet test
 on_finish :
