@@ -8,6 +8,8 @@ init:
   - cmd: git config --global core.autocrlf true
 environment:
   nodejs_version: "11.10.1"
+  sonar_login:
+    secure: 6ab161fdc23e10e706b43268ee21ef856131b26a
 install:
   # Install repo specific stuff here
   # Get the latest stable version of Node.js or io.js
@@ -25,7 +27,19 @@ before_build:
   # Display minimal restore text
   - cmd: dotnet restore ./Gardenalogue.Web/Gardenalogue.Web.csproj --verbosity m  
 build_script:
-  - cmd: dotnet build src
+  ps: >-
+    if ("$env:APPVEYOR_PULL_REQUEST_NUMBER" -eq "")
+    {
+      dotnet sonarscanner begin /k:"fuzzytyrion_Gardenalogue" /o:"fuzzytyrion" /v:"$env:GitVersion_FullSemVer" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$env:sonar_login" /d:sonar.branch.name="$env:APPVEYOR_REPO_BRANCH"
+    }
+    else
+    {
+      dotnet sonarscanner begin /k:"fuzzytyrion_Gardenalogue" /o:"fuzzytyrion" /v:"$env:GitVersion_FullSemVer" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$env:sonar_login" /d:sonar.pullrequest.key="$env:APPVEYOR_PULL_REQUEST_NUMBER" /d:sonar.pullrequest.branch="$env:APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH" /d:sonar.pullrequest.base="$env:APPVEYOR_REPO_BRANCH"
+    }
+    
+    dotnet build src
+    
+    dotnet sonarscanner end /d:sonar.login="$env:sonar_login"
 after_build:
   # For once the build has completed
 artifacts:
