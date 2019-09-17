@@ -5,6 +5,7 @@ VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{53761292-033F-4179-AD6E-FADC79F51F8A}"
 	ProjectSection(SolutionItems) = preProject
+		.bettercodehub.yml = .bettercodehub.yml
 		appveyor.yml = appveyor.yml
 	EndProjectSection
 EndProject
