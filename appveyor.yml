@@ -23,7 +23,8 @@ before_build:
   # Display .NET Core version
   - cmd: dotnet --version
   # Display minimal restore text
-  - cmd: dotnet restore ./src/Gardenalogue.Web/Gardenalogue.Web.csproj --verbosity m  
+  - cmd: dotnet restore ./src/Gardenalogue.Web/Gardenalogue.Web.csproj --verbosity m 
+  - nuget restore ".\src\Gardenalogue.sln"
 build_script:
   ps: >-
     dotnet build src
