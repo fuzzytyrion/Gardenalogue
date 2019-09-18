@@ -8,6 +8,8 @@ init:
   - cmd: git config --global core.autocrlf true
 environment:
   nodejs_version: "11.10.1"
+  COVERALLS_REPO_TOKEN:
+    secure: ZzbSvqtdI0JnPYSmj8N4ladrU8Na5Tjj2Qe0VrBPFbzHfXRJ1LiuDZpyCJWxbdN/
 install:
   # Install repo specific stuff here
   # Get the latest stable version of Node.js or io.js
@@ -25,18 +27,11 @@ before_build:
 build_script:
   ps: >-
     dotnet build src
-after_build:
-  # For once the build has completed
-artifacts:
- #- path: '\src\bin\Debug\netcoreapp2.2\publish'
- #  name: WebSite
- #  type: WebDeployPackage
-clone_depth: 1
 test_script:
-  # restore packages for our unit tests
-  - cmd: dotnet restore ./src/Gardenalogue.Test/Gardenalogue.Test.csproj --verbosity m
-  # run the unit tests
-  - cmd: dotnet test
-on_finish :
-  # any cleanup in here
-deploy: off
+- ps: >-
+    .\src\packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user -target:nunit-console.exe "-targetargs:""src\Gardenalogue.Test\bin\Debug\Gardenalogue.Test.dll"" /noshadow" -filter:"+[Gardenalogue*]*" -output:opencoverCoverage.xml
+    $coveralls = (Resolve-Path "src/packages/coveralls.net.*/tools/csmacnz.coveralls.exe").ToString()
+    
+    $env:APPVEYOR_BUILD_NUMBER
+    
+    & $coveralls --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --useRelativePaths --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_BUILD_NUMBER --serviceName appveyor
