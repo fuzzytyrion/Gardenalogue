@@ -8,6 +8,8 @@ init:
   - cmd: git config --global core.autocrlf true
 environment:
   nodejs_version: "11.10.1"
+  COVERALLS_REPO_TOKEN:
+    secure: ZzbSvqtdI0JnPYSmj8N4ladrU8Na5Tjj2Qe0VrBPFbzHfXRJ1LiuDZpyCJWxbdN/
 install:
   # Install repo specific stuff here
   # Get the latest stable version of Node.js or io.js
@@ -37,6 +39,9 @@ test_script:
   - cmd: dotnet restore ./src/Gardenalogue.Test/Gardenalogue.Test.csproj --verbosity m
   # run the unit tests
   - cmd: dotnet test
+after_test: 
+# generate report for NUnit testing framework:
+  - cmd:packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -filter:"+[*]*" -target:"packages\NUnit.ConsoleRunner.3.2.1\tools\nunit3-console.exe" -targetargs:"/domain:single Gardenalogue.Test/bin/debug/Gardenalogue.Test.dll" -output:coverage.xml
 on_finish :
   # any cleanup in here
 deploy: off
