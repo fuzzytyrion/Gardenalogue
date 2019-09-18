@@ -3,6 +3,7 @@ image: Visual Studio 2017
 branches:
   only:
   - master
+configuration: Debug
 init:
   # Good practise, because Windows line endings are different from Unix/Linux ones
   - cmd: git config --global core.autocrlf true
@@ -17,16 +18,11 @@ install:
   # install modules
   - npm install
 before_build:
-  # Output useful info for debugging.
-  - node --version
-  - npm --version
-  # Display .NET Core version
-  - cmd: dotnet --version
-  # Display minimal restore text
-  - cmd: dotnet restore ./src/Gardenalogue.Web/Gardenalogue.Web.csproj --verbosity m
+  - dotnet restore
+  - nuget install -Verbosity quiet opencover -Version 4.6.519 -OutputDirectory tools
+  - nuget install -Verbosity quiet coveralls.net -Version 0.7.0 -OutputDirectory tools
 build_script:
-  ps: >-
-    dotnet build src
+  - dotnet build -c Debug /p:DebugType=full
 test_script:
   # restore packages for our unit tests
   - cmd: dotnet restore ./src/Gardenalogue.Test/Gardenalogue.Test.csproj --verbosity m
