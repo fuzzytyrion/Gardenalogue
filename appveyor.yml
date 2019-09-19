@@ -9,6 +9,10 @@ init:
   - cmd: git config --global core.autocrlf true
 environment:
   nodejs_version: "11.10.1"
+  coverlet_output: "%APPVEYOR_BUILD_FOLDER%/build/Coverlet.Coverage.OpenCover.xml"
+  
+  CODECOV_TOKEN:
+    secure: 6/b/L0Y3KaHvhT4SbEnrtOisKfJkmiykvYEeuJLcWNY/kQKvhHRl1/TlLEOskVfp
 install:
   # Install repo specific stuff here
   # Get the latest stable version of Node.js or io.js
@@ -16,8 +20,14 @@ install:
   # install modules
   - npm install
 before_build:
-  - dotnet restore
+  cmd: >-
+    choco install codecov
+    
+    dotnet restore src
 build_script:
-  - dotnet build -c Debug /p:DebugType=full
-test_script:
-  - ps: .\test.ps1
+  ps: >-
+    dotnet build src
+    
+    dotnet test src /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="$env:coverlet_output"
+    
+    codecov -f "$env:coverlet_output" -t "$env:CODECOV_TOKEN"
