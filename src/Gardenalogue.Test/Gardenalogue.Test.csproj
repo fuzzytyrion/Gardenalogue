@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Gardenalogue.Service\Gardenalogue.Service.csproj" />
+    <ProjectReference Include="..\Gardenalogue.Web\Gardenalogue.Web.csproj" />
   </ItemGroup>
 
 </Project>
