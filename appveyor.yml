@@ -9,8 +9,6 @@ init:
   - cmd: git config --global core.autocrlf true
 environment:
   nodejs_version: "11.10.1"
-  COVERALLS_REPO_TOKEN:
-    secure: ZzbSvqtdI0JnPYSmj8N4ladrU8Na5Tjj2Qe0VrBPFbzHfXRJ1LiuDZpyCJWxbdN/
 install:
   # Install repo specific stuff here
   # Get the latest stable version of Node.js or io.js
@@ -19,10 +17,7 @@ install:
   - npm install
 before_build:
   - dotnet restore
-  - nuget install -Verbosity quiet opencover -Version 4.6.519 -OutputDirectory tools
-  - nuget install -Verbosity quiet coveralls.net -Version 0.7.0 -OutputDirectory tools
 build_script:
   - dotnet build -c Debug /p:DebugType=full
 test_script:
-  - ps: .\tools\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:nunit3-console.exe -targetargs:"/domain:single src\Gardenalogue.Test\bin\$env:CONFIGURATION\netcoreapp2.2\Gardenalogue.Test.dll" -filter:"+[Gardenalogue*]*" -output:opencoverCoverage.xml
-  - ps: .\tools\coveralls.net.0.7.0\tools\csmacnz.coveralls.exe --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --useRelativePaths --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_BUILD_NUMBER --serviceName appveyor
+  - ps: .\test.ps1
