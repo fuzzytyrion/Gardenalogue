@@ -8,5 +8,10 @@ namespace Gardenalogue.Service
         {
             return true;
         }
+
+        public bool Method2()
+        {
+            return false;
+        }
     }
 }
