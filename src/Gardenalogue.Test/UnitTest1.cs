@@ -1,3 +1,4 @@
+using Gardenalogue.Service;
 using NUnit.Framework;
 
 namespace Tests
@@ -12,7 +13,8 @@ namespace Tests
         [Test]
         public void Test1()
         {
-            Assert.Pass();
+            var sut = new Class1();
+            Assert.IsTrue(sut.Method1());
         }
     }
 }
