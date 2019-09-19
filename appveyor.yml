@@ -13,6 +13,10 @@ environment:
   
   CODECOV_TOKEN:
     secure: 6/b/L0Y3KaHvhT4SbEnrtOisKfJkmiykvYEeuJLcWNY/kQKvhHRl1/TlLEOskVfp
+
+build: off
+test: off
+
 install:
   # Install repo specific stuff here
   # Get the latest stable version of Node.js or io.js
