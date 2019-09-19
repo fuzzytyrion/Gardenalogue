@@ -9,7 +9,8 @@ init:
   - cmd: git config --global core.autocrlf true
 environment:
   nodejs_version: "11.10.1"
-  coverlet_output: "%APPVEYOR_BUILD_FOLDER%/build/Coverlet.Coverage.OpenCover.xml"
+
+  coverlet_output: "%APPVEYOR_BUILD_FOLDER%\build\Coverlet.Coverage.OpenCover.xml"
   
   CODECOV_TOKEN:
     secure: 6/b/L0Y3KaHvhT4SbEnrtOisKfJkmiykvYEeuJLcWNY/kQKvhHRl1/TlLEOskVfp
