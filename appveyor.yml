@@ -24,6 +24,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
   # install modules
   - npm install
+  - docker version
 before_build:
   cmd: >-
     choco install codecov
@@ -36,3 +37,5 @@ build_script:
     dotnet test src /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="$env:coverlet_output"
     
     codecov -f "$env:coverlet_output" -t "$env:CODECOV_TOKEN"
+
+    docker build -t me/myfavoriteapp .
