@@ -16,5 +16,12 @@ namespace Tests
             var sut = new Class1();
             Assert.IsTrue(sut.Method1());
         }
+
+        [Test]
+        public void Test2()
+        {
+            var sut = new Class1();
+            Assert.IsFalse(sut.Method2());
+        }
     }
 }
