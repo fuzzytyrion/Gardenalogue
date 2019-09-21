@@ -2,6 +2,7 @@ version: '1.0.{build}'
 image: Visual Studio 2017
 branches:
   only:
+  - develop
   - master
 configuration: Debug
 init:
@@ -26,8 +27,6 @@ install:
   - npm install
 before_build:
   cmd: >-
-    docker version
-    
     choco install codecov
     
     dotnet restore src
