@@ -15,4 +15,9 @@
     <PackageReference Include="OpenCover" Version="4.7.922" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Gardenalogue.Core\Gardenalogue.Core.csproj" />
+    <ProjectReference Include="..\..\Gardenalogue.Data\Gardenalogue.Data.csproj" />
+  </ItemGroup>
+
 </Project>
