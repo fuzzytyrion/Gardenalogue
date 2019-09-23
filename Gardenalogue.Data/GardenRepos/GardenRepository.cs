@@ -19,12 +19,28 @@ namespace Gardenalogue.Data.GardenRepos
 
         public async Task<List<Garden>> GetAll()
         {
-            return await _gardenContext.Gardens.ToListAsync();
+            return await _gardenContext.Gardens.AsNoTracking().ToListAsync();
         }
 
         public async Task<Garden> GetByid(int id)
         {
-            return await _gardenContext.Gardens.FindAsync(id);
+            return await _gardenContext.Gardens.AsNoTracking().SingleOrDefaultAsync(g => g.Id == id);
         }
+
+        public async Task Create(Garden garden)
+        {
+            await _gardenContext.Gardens.AddAsync(garden);
+            await _gardenContext.SaveChangesAsync();
+        }
+
+        public async Task Update(Garden garden)
+        {
+            _gardenContext.Update(garden);
+            await _gardenContext.SaveChangesAsync();
+        }
+
+
+
+
     }
 }
