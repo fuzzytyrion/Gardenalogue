@@ -39,7 +39,11 @@ namespace Gardenalogue.Data.GardenRepos
             await _gardenContext.SaveChangesAsync();
         }
 
-
+        public async Task Delete(int id)
+        {
+            var gardenToDelete = await _gardenContext.Gardens.FindAsync(id);
+            _gardenContext.Gardens.Remove(gardenToDelete);
+        }
 
 
     }
