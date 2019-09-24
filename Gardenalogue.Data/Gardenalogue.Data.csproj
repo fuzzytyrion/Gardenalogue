@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="GenFu" Version="1.5.6" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Gardenalogue.Core\Gardenalogue.Core.csproj" />
   </ItemGroup>
 

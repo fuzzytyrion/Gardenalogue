@@ -1,5 +1,6 @@
 ﻿using Gardenalogue.Core.Contexts;
 using Gardenalogue.Core.Models;
+using Gardenalogue.Core.Repos;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Gardenalogue.Data.GardenRepos
 {
-    public class GardenRepository
+    public class GardenRepository : IGardenRepository
     {
         private readonly GardenalogueContext _gardenContext;
 
