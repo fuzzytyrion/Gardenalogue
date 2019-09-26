@@ -13,7 +13,7 @@ namespace Gardenalogue.Core.Contexts
 
         public GardenalogueContext() { }
 
-        public DbSet<Garden> Gardens { get; set; }
+        public virtual DbSet<Garden> Gardens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
