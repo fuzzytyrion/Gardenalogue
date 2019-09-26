@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Gardenalogue.Core.Enums;
 using Gardenalogue.Core.Models;
 
 namespace Gardenalogue.Core.Repos
 {
     public interface IGardenRepository
     {
-        Task Create(Garden garden);
-        Task Delete(int id);
+        Task<GardenRepositoryOutcome> Create(Garden garden);
+        Task<GardenRepositoryOutcome> Delete(int id);
         Task<List<Garden>> GetAll();
         Task<Garden> GetByid(int id);
-        Task Update(Garden garden);
+        Task<GardenRepositoryOutcome> Update(Garden garden);
     }
 }
