@@ -1,6 +1,8 @@
 using Gardenalogue.Core.Contexts;
 using Gardenalogue.Core.Repos;
+using Gardenalogue.Core.Services;
 using Gardenalogue.Data.GardenRepos;
+using Gardenalogue.Service.GardenServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +31,7 @@ namespace Gardenalogue.Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<GardenalogueContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IGardenRepository, GardenRepository>();
+            services.AddTransient<IGardenService, GardenService>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
