@@ -2,6 +2,7 @@
 using Gardenalogue.Core.Enums;
 using Gardenalogue.Core.Models;
 using Gardenalogue.Data.GardenRepos;
+using Gardenalogue.Service.GardenServices;
 using GenFu;
 using Microsoft.EntityFrameworkCore;
 using Moq;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 namespace Gardenalogue.Test.GardenTests
 {
     [TestFixture]
-    class GardenRepoTests
+    class GardenServiceTests
     {
         private IEnumerable<Garden> GetFakeData()
         {
@@ -30,7 +31,7 @@ namespace Gardenalogue.Test.GardenTests
         {
             // arrange
             var options = new DbContextOptionsBuilder<GardenalogueContext>()
-                .UseInMemoryDatabase(databaseName: "GardenRepo_GetByIdGardenTest")
+                .UseInMemoryDatabase(databaseName: "GardenService_GetByIdGardenTest")
                 .Options;
 
             // Insert seed data into the database using one instance of the context
@@ -43,8 +44,8 @@ namespace Gardenalogue.Test.GardenTests
             // Use a clean instance of the context to run the test
             using (var context = new GardenalogueContext(options))
             {
-                var repo = new GardenRepository(context);
-                var result = await repo.GetByid(1);
+                var service = new GardenService(new GardenRepository(context));
+                var result = await service.GetByid(1);
                 Assert.IsNotNull(result);
             }
         }
@@ -54,7 +55,7 @@ namespace Gardenalogue.Test.GardenTests
         {
             // arrange
             var options = new DbContextOptionsBuilder<GardenalogueContext>()
-                .UseInMemoryDatabase(databaseName: "GardenRepo_GetAllGardenTest")
+                .UseInMemoryDatabase(databaseName: "GardenService_GetAllGardenTest")
                 .Options;
 
             // Insert seed data into the database using one instance of the context
@@ -67,8 +68,8 @@ namespace Gardenalogue.Test.GardenTests
             // Use a clean instance of the context to run the test
             using (var context = new GardenalogueContext(options))
             {
-                var repo = new GardenRepository(context);
-                var result = await repo.GetAll();
+                var service = new GardenService(new GardenRepository(context));
+                var result = await service.GetAll();
                 Assert.AreEqual(26, result.Count);
             }
         }
@@ -78,7 +79,7 @@ namespace Gardenalogue.Test.GardenTests
         {
             // arrange
             var options = new DbContextOptionsBuilder<GardenalogueContext>()
-                .UseInMemoryDatabase(databaseName: "GardenRepo_DeleteGardenTest")
+                .UseInMemoryDatabase(databaseName: "GardenService_DeleteGardenTest")
                 .Options;
 
             // Insert seed data into the database using one instance of the context
@@ -91,9 +92,9 @@ namespace Gardenalogue.Test.GardenTests
             // Use a clean instance of the context to run the test
             using (var context = new GardenalogueContext(options))
             {
-                var repo = new GardenRepository(context);
-                var result = await repo.Delete(1);
-                var count = await repo.GetAll();
+                var service = new GardenService(new GardenRepository(context));
+                var result = await service.Delete(1);
+                var count = await service.GetAll();
                 Assert.AreEqual(25, count.Count);
                 Assert.AreEqual(GardenRepositoryOutcome.Success, result);
             }
@@ -104,7 +105,7 @@ namespace Gardenalogue.Test.GardenTests
         {
             // arrange
             var options = new DbContextOptionsBuilder<GardenalogueContext>()
-                .UseInMemoryDatabase(databaseName: "GardenRepo_UpdateGardenTest")
+                .UseInMemoryDatabase(databaseName: "GardenService_UpdateGardenTest")
                 .Options;
 
             // Insert seed data into the database using one instance of the context
@@ -117,8 +118,8 @@ namespace Gardenalogue.Test.GardenTests
             // Use a clean instance of the context to run the test
             using (var context = new GardenalogueContext(options))
             {
-                var repo = new GardenRepository(context);
-                var result = await repo.Update(new Garden() { Id = 1, Name = "dsfds" });
+                var service = new GardenService(new GardenRepository(context));
+                var result = await service.Update(new Garden() { Id = 1, Name = "dsfds" });
                 Assert.AreEqual(26, context.Gardens.ToList().Count);
                 Assert.AreEqual(GardenRepositoryOutcome.Success, result);
             }
@@ -129,7 +130,7 @@ namespace Gardenalogue.Test.GardenTests
         {
             // arrange
             var options = new DbContextOptionsBuilder<GardenalogueContext>()
-                .UseInMemoryDatabase(databaseName: "GardenRepo_CreateGardenTest")
+                .UseInMemoryDatabase(databaseName: "GardenService_CreateGardenTest")
                 .Options;
 
             // Insert seed data into the database using one instance of the context
@@ -142,8 +143,8 @@ namespace Gardenalogue.Test.GardenTests
             // Use a clean instance of the context to run the test
             using (var context = new GardenalogueContext(options))
             {
-                var repo = new GardenRepository(context);
-                var result = await repo.Create(new Garden() { Id = 27, Name = "dsfds" });
+                var service = new GardenService(new GardenRepository(context));
+                var result = await service.Create(new Garden() { Id = 27, Name = "dsfds" });
                 Assert.AreEqual(27, context.Gardens.ToList().Count);
                 Assert.AreEqual(GardenRepositoryOutcome.Success, result);
             }
