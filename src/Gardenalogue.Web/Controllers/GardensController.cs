@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Gardenalogue.Core.Models;
+using Gardenalogue.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,36 +13,49 @@ namespace Gardenalogue.Web.Controllers
     [ApiController]
     public class GardensController : ControllerBase
     {
+        private readonly IGardenService _gardenService;
+
+        public GardensController(IGardenService gardenService)
+        {
+            _gardenService = gardenService;
+        }
+
         // GET: api/Gardens
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(await _gardenService.GetAll());
         }
 
         // GET: api/Gardens/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            return "value";
+            return Ok(await _gardenService.GetByid(id));
         }
 
         // POST: api/Gardens
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult> Post([FromBody] Garden value)
         {
+            await _gardenService.Create(value);
+            return NoContent();
         }
 
         // PUT: api/Gardens/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public async Task<ActionResult> Put([FromBody] Garden value)
         {
+            await _gardenService.Update(value);
+            return NoContent();
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
+            await _gardenService.Delete(id);
+            return NoContent();
         }
     }
 }
