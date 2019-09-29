@@ -22,21 +22,21 @@ namespace Gardenalogue.Web.Controllers
 
         // GET: api/Gardens
         [HttpGet]
-        public async Task<ActionResult> Get()
+        public async Task<IActionResult> Get()
         {
             return Ok(await _gardenService.GetAll());
         }
 
         // GET: api/Gardens/5
         [HttpGet("{id}", Name = "Get")]
-        public async Task<ActionResult> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             return Ok(await _gardenService.GetByid(id));
         }
 
         // POST: api/Gardens
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] Garden value)
+        public async Task<IActionResult> Post([FromBody] Garden value)
         {
             await _gardenService.Create(value);
             return NoContent();
@@ -44,7 +44,7 @@ namespace Gardenalogue.Web.Controllers
 
         // PUT: api/Gardens/5
         [HttpPut]
-        public async Task<ActionResult> Put([FromBody] Garden value)
+        public async Task<IActionResult> Put([FromBody] Garden value)
         {
             await _gardenService.Update(value);
             return NoContent();
@@ -52,7 +52,7 @@ namespace Gardenalogue.Web.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             await _gardenService.Delete(id);
             return NoContent();
