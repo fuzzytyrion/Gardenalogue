@@ -27,8 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Gardenalogue.Core\Gardenalogue.Core.csproj" />
-    <ProjectReference Include="..\..\Gardenalogue.Data\Gardenalogue.Data.csproj" />
     <ProjectReference Include="..\Gardenalogue.Service\Gardenalogue.Service.csproj" />
     <ProjectReference Include="..\Gardenalogue.Web\Gardenalogue.Web.csproj" />
   </ItemGroup>
