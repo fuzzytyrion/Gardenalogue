@@ -2,3 +2,5 @@ component_depth: 2
 languages:
 - csharp
 - typescript
+exclude:
+- /src/Gardenalogue.Core/Migrations/.*
