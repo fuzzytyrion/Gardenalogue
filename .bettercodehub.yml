@@ -4,4 +4,3 @@ languages:
 - typescript
 exclude:
 - /src/Gardenalogue.Core/Migrations/.*
-- /src/Gardenalogue.Test/.*
