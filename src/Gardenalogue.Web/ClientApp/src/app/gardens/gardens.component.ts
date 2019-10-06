@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Garden } from '../models/garden';
+import { GardenService } from '../services/garden.service';
 
 @Component({
   selector: 'app-gardens',
@@ -7,14 +8,18 @@ import { Garden } from '../models/garden';
   styleUrls: ['./gardens.component.css']
 })
 export class GardensComponent implements OnInit {
-  garden: Garden = {
-    id: 1,
-    name: 'back'
-  };
+  gardens: Garden[];
 
-  constructor() { }
+  constructor(private gardenService: GardenService) { }
 
   ngOnInit() {
+    this.getGardens();
+    console.log(JSON.stringify(this.gardens, undefined, 2))
+  }
+
+  getGardens(): void {
+    this.gardenService.getGardens()
+      .subscribe(gardens => this.gardens = gardens);
   }
 
 }
