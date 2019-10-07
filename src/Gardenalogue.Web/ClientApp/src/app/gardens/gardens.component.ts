@@ -18,6 +18,7 @@ export class GardensComponent implements OnInit {
   }
 
   getGardens(): void {
+    console.log('bebbo');
     this.gardenService.getGardens()
       .subscribe(gardens => this.gardens = gardens);
   }

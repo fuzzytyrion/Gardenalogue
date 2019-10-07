@@ -1,3 +1,6 @@
-<h2>{{garden.name}}</h2>
-<div><span>id: </span>{{garden.id}}</div>
-<div><span>id: </span>{{garden.name}}</div>
+<h2>My Gardens</h2>
+<ul class="gardens">
+  <li *ngFor="let garden of gardens">
+    <span class="badge">{{garden.id}}</span> {{garden.name}}
+  </li>
+</ul>
