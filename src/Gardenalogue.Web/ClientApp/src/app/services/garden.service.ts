@@ -6,7 +6,7 @@ import { Garden } from '../models/garden';
 @Injectable({ providedIn: 'root' })
 export class GardenService {
 
-  private gardensUrl = 'https://localhost:44337/api/Gardens';  // URL to web api
+  private gardensUrl = 'https://localhost:44336/api/Gardens';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
