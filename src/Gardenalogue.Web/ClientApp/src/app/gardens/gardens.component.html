@@ -1,6 +1,7 @@
 <h2>My Gardens</h2>
 <ul class="gardens">
-  <li *ngFor="let garden of gardens">
+  <li *ngFor="let garden of gardens" (click)="onSelect(garden)">
     <span class="badge">{{garden.id}}</span> {{garden.name}}
   </li>
 </ul>
+<app-garden-detail [garden]="selectedGarden"></app-garden-detail>
