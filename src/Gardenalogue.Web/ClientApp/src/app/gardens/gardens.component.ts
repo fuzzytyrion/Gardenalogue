@@ -9,16 +9,18 @@ import { GardenService } from '../services/garden.service';
 })
 export class GardensComponent implements OnInit {
   gardens: Garden[];
-
+  selectedGarden: Garden;
   constructor(private gardenService: GardenService) { }
 
   ngOnInit() {
     this.getGardens();
-    console.log(JSON.stringify(this.gardens, undefined, 2))
+  }
+
+  onSelect(garden: Garden): void {
+    this.selectedGarden = garden;
   }
 
   getGardens(): void {
-    console.log('bebbo');
     this.gardenService.getGardens()
       .subscribe(gardens => this.gardens = gardens);
   }

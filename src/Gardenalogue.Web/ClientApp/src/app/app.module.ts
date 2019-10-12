@@ -6,11 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { GardensComponent } from './gardens/gardens.component';
 import { GardenService } from './services/garden.service';
+import { GardenDetailComponent } from './garden-detail/garden-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GardensComponent
+    GardensComponent,
+    GardenDetailComponent
   ],
   imports: [
     BrowserModule,
