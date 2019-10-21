@@ -6,16 +6,19 @@ import { Garden } from '../models/garden';
 @Injectable({ providedIn: 'root' })
 export class GardenService {
 
-  private gardensUrl = 'https://localhost:44336/api/Gardens';  // URL to web api
+    private gardensUrl = 'https://localhost:44336/api/Gardens';  // URL to web api
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+    httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { }
 
-  getGardens(): Observable<Garden[]> {
-    return this.http.get<Garden[]>(this.gardensUrl);
-  }
+    getGardens(): Observable<Garden[]> {
+        return this.http.get<Garden[]>(this.gardensUrl);
+    }
 
+    updateGarden(garden: Garden): Observable<any> {
+        return this.http.put(this.gardensUrl, garden, this.httpOptions);
+    }
 }
