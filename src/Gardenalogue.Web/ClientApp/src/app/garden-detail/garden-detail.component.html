@@ -1,4 +1,9 @@
 <div *ngIf="garden">
   <h2>{{garden.name}}</h2>
   <div>id: <span>{{garden.id}}</span></div>
+  <label>
+    name:
+    <input [(ngModel)]="garden.name" placeholder="name" />
+  </label>
+  <button (click)="save()">save</button>
 </div>
