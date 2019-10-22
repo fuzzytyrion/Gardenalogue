@@ -21,4 +21,15 @@ export class GardenService {
     updateGarden(garden: Garden): Observable<any> {
         return this.http.put(this.gardensUrl, garden, this.httpOptions);
     }
+
+    addGarden(garden: Garden): Observable<Garden> {
+        return this.http.post<Garden>(this.gardensUrl, garden, this.httpOptions);
+    }
+
+    deleteGarden(garden: Garden | number): Observable<Garden> {
+        const id = typeof garden === 'number' ? garden : garden.id;
+        const url = `${this.gardensUrl}/${id}`;
+
+        return this.http.delete<Garden>(url, this.httpOptions);
+    }
 }

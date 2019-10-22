@@ -1,7 +1,23 @@
 <h2>My Gardens</h2>
+<div>
+  <label>
+    Garden name:
+    <input #gardenName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(gardenName.value); gardenName.value=''">
+    add
+  </button>
+</div>
+
 <ul class="gardens">
   <li *ngFor="let garden of gardens" (click)="onSelect(garden)">
     <span class="badge">{{garden.id}}</span> {{garden.name}}
+    <button class="delete" title="delete garden"
+            (click)="delete(garden)">
+      x
+    </button>
   </li>
+
 </ul>
 <app-garden-detail [garden]="selectedGarden"></app-garden-detail>
