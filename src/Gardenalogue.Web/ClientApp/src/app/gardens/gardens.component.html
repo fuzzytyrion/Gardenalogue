@@ -11,13 +11,9 @@
 </div>
 
 <ul class="gardens">
-  <li *ngFor="let garden of gardens" (click)="onSelect(garden)">
-    <span class="badge">{{garden.id}}</span> {{garden.name}}
-    <button class="delete" title="delete garden"
-            (click)="delete(garden)">
-      x
-    </button>
+  <li *ngFor="let garden of gardens">
+    <a routerLink="/detail/{{garden.id}}">
+      <span class="badge">{{garden.id}}</span> {{garden.name}}
+    </a>
   </li>
-
 </ul>
-<app-garden-detail [garden]="selectedGarden"></app-garden-detail>

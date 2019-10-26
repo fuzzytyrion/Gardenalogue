@@ -18,6 +18,12 @@ export class GardenService {
         return this.http.get<Garden[]>(this.gardensUrl);
     }
 
+    getGarden(id: number): Observable<Garden> {
+        const url = `${this.gardensUrl}/${id}`;
+
+        return this.http.get<Garden>(url, this.httpOptions);
+    }
+
     updateGarden(garden: Garden): Observable<any> {
         return this.http.put(this.gardensUrl, garden, this.httpOptions);
     }
