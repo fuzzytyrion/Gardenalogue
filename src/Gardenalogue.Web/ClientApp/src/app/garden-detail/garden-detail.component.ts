@@ -34,4 +34,7 @@ export class GardenDetailComponent implements OnInit {
         this.gardenService.updateGarden(this.garden).subscribe();
     }
 
+    goBack(): void {
+        this.location.back();
+    }
 }
